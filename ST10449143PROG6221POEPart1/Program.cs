@@ -22,7 +22,7 @@ namespace ST10449143PROG6221POEPart1
 
                     player.PlaySync(); // PlaySync waits for the audio to finish before continuing
                 }
-            }
+            } 
             else
             {
                 Console.WriteLine("Audio file not found. Please check the file path.");
