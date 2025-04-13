@@ -13,20 +13,32 @@ namespace ST10449143PROG6221POEPart1
         static void Main(string[] args)
         {
             string imagePath = @"C:\Users\lab_services_student\Desktop\PROG6221POEPart1\ST10449143PROG6221POEPart1\cyber.jpg";
-            ShowAsciiTitle();
+            string audioFilePath = @"C:\Users\lab_services_student\Desktop\PROG6221POEPart1\ST10449143PROG6221POEPart1\greeting.wav";
 
-            PlayGreetingAudio();
+            Console.Title = "Cybersecurity Awareness Assistant";
 
-            LaunchChatbot();
+            PlayGreetingAudio(audioFilePath);
+            ShowAsciiTitle(imagePath);
+            
+            Console.Write("Please enter your name: ");
+            string userName = Console.ReadLine()?.Trim();
+
+            Console.Clear();
+            ShowAsciiTitle(imagePath);
+            LaunchChatbot(userName);
         }
 
-        static void ShowAsciiTitle()
+        static void ShowAsciiTitle(string imagePath)
         {
-            string imagePath = @"C:\Users\lab_services_student\Desktop\PROG6221POEPart1\ST10449143PROG6221POEPart1\cyber.jpg";
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("===============================================");
+            Console.WriteLine("        Welcome to the Cybersecurity Bot       ");
+            Console.WriteLine("===============================================\n");
+            Console.ResetColor();
 
             if (!File.Exists(imagePath))
             {
-                Console.WriteLine("ASCII image not found.");
+                Console.WriteLine("ASCII image not found.\n");
                 return;
             }
 
@@ -38,7 +50,7 @@ namespace ST10449143PROG6221POEPart1
         static string ConvertToAsciiSimple(string imagePath)
         {
             string shades = "@#S%?*+;:,. ";
-            StringBuilder sb = new StringBuilder();
+            List<string> lines = new List<string>();
 
             using (var image = Image.Load<Rgba32>(imagePath))
             {
@@ -48,32 +60,34 @@ namespace ST10449143PROG6221POEPart1
 
                 for (int y = 0; y < image.Height; y++)
                 {
+                    StringBuilder line = new StringBuilder();
                     for (int x = 0; x < image.Width; x++)
                     {
                         var pixel = image[x, y];
                         int brightness = (pixel.R + pixel.G + pixel.B) / 3;
                         int index = brightness * (shades.Length - 1) / 255;
-                        sb.Append(shades[index]);
+                        line.Append(shades[index]);
                     }
-                    sb.AppendLine();
+                    lines.Add(line.ToString());
                 }
             }
-            return sb.ToString();
+            
+            while (lines.Count > 0 && string.IsNullOrWhiteSpace(lines[0].Replace(" ", "").Replace(".", "")))
+                lines.RemoveAt(0);
+            while (lines.Count > 0 && string.IsNullOrWhiteSpace(lines[^1].Replace(" ", "").Replace(".", "")))
+                lines.RemoveAt(lines.Count - 1);
+
+            return string.Join(Environment.NewLine, lines);
         }
 
-        static void PlayGreetingAudio()
+        static void PlayGreetingAudio(string audioFilePath)
         {
-            // Path to the audio file
-            string audioFilePath = @"C:\Users\lab_services_student\Desktop\PROG6221POEPart1\ST10449143PROG6221POEPart1\greeting.wav";
-
-            // Check if the file exists
             if (File.Exists(audioFilePath))
             {
-                // Create a SoundPlayer object and play the sound as a voice greeting
                 using (SoundPlayer player = new SoundPlayer(audioFilePath))
                 {
                     Console.WriteLine("Playing voice greeting...\n");
-                    player.PlaySync(); // Play the sound synchronously
+                    player.PlaySync();
                 }
             }
             else
@@ -82,13 +96,12 @@ namespace ST10449143PROG6221POEPart1
             }
         }
 
-        static void LaunchChatbot()
+        static void LaunchChatbot(string name)
         {
-            // Simulate a chatbot launch
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("Hello! Welcome to the Cybersecurity Awareness Assistant.");
-            Console.WriteLine("I'm here to help you stay safe online. Let's begin!\n");
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"Hi {name}, welcome to the Cybersecurity Awareness Assistant!");
+            Console.WriteLine("I'm your virtual assistant to help you stay safe online.\n");
+
+            }
         }
     }
-}
