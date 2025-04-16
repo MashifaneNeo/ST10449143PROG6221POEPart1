@@ -105,13 +105,14 @@ namespace ST10449143PROG6221POEPart1
         //Method to print text with a delay
         public static void PrintWithDelay(string text, int delay = 13, ConsoleColor? color = null)
         {
+            // Check if the color is specified and set it
             if (color.HasValue)
                 Console.ForegroundColor = color.Value;
 
             // Print each character with a delay
             foreach (char c in text)
             {
-                // Check if the character is a new line
+                //Print the character 
                 Console.Write(c);
                 Thread.Sleep(delay);
             }
