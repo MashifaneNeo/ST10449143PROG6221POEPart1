@@ -78,7 +78,7 @@ namespace ST10449143PROG6221POEPart1
                 using (SoundPlayer player = new SoundPlayer(audioFilePath))
                 {
                     player.PlaySync();
-                } 
+                }
 #pragma warning restore CA1416
             }
             else
