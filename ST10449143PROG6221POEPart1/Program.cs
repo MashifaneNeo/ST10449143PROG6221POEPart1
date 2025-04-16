@@ -17,7 +17,7 @@ namespace ST10449143PROG6221POEPart1
             string imagePath = @"C:\\Users\\lab_services_student\\Desktop\\PROG6221POEPart1\\ST10449143PROG6221POEPart1\\cyber.jpg";
             string audioFilePath = @"C:\\Users\\lab_services_student\\Desktop\\PROG6221POEPart1\\ST10449143PROG6221POEPart1\\greeting.wav";
 
-            // Check if the image and audio files exist
+            //The title of the console window
             Console.Title = "Cybersecurity Awareness Assistant";
 
             //Play voice greeting and show ASCII art
