@@ -29,18 +29,18 @@ namespace ST10449143PROG6221POEPart1
                     case "how are you":
                     case "how are you?":
                         Program.PrintWithDelay($"\nThank you for asking {name}, I'm functioning perfectly " +
-                            $"fine and in the best state to help you stay cyber safe!", 13, ConsoleColor.Blue);
+                            $"fine and I am in the best state to help you stay cyber safe!", 13, ConsoleColor.Blue);
                         break;
 
                     case "whats your purpose":
-                    case "what is your purpose":
-                        Program.PrintWithDelay($"\nMy purpose {name} is to guide you through the understanding " +
+                    case "what is your purpose?":
+                        Program.PrintWithDelay($"\nMy purpose {name}, is to guide you through the understanding " +
                             $"of cybersecurity and teach you how to properly protect yourself from " +
                             $"online threats.", 13, ConsoleColor.Blue);
                         break;
 
                     case "what can i ask you about":
-                    case "what can i ask you":
+                    case "what can i ask you?":
                         Program.PrintWithDelay("╔════════════════════════════════════════════╗", 13, ConsoleColor.DarkGreen);
                         Program.PrintWithDelay("║ You can ask me questions like:             ║", 13, ConsoleColor.DarkGreen);
                         Program.PrintWithDelay("║  - How are you?                            ║", 13, ConsoleColor.DarkGreen);
@@ -53,7 +53,7 @@ namespace ST10449143PROG6221POEPart1
                         Program.PrintWithDelay("╚════════════════════════════════════════════╝", 13, ConsoleColor.DarkGreen);
                         break;
 
-                    case "what is phishing":
+                    case "what is phishing?":
                     case "whats phishing":
                         Program.PrintWithDelay($"\nPhishing is a form of cyberattack where malicious actors impersonate trustworthy sources " +
                             $"to trick you into revealing personal or sensitive information. " +
@@ -65,7 +65,7 @@ namespace ST10449143PROG6221POEPart1
                         Program.PrintWithDelay("- Never provide passwords or sensitive data to unverified sources.", 13, ConsoleColor.Blue);
                         break;
 
-                    case "how to create a strong password":
+                    case "how to create a strong password?":
                     case "how to create a password":
                         Program.PrintWithDelay($"\nCreating a strong password is essential for protecting your online accounts {name}.", 13, ConsoleColor.Blue);
 
@@ -76,8 +76,8 @@ namespace ST10449143PROG6221POEPart1
                         Program.PrintWithDelay("- Consider using a password manager to keep track of your passwords.", 13, ConsoleColor.Blue);
                         break;
 
-                    case "how to recognize suspicious links":
-                    case "how to identify suspicious links":
+                    case "how to recognize suspicious links?":
+                    case "how to identify suspicious links?":
                         Program.PrintWithDelay($"\nThat’s a great question, {name}. Identifying suspicious links" +
                             $" is key to avoiding scams.", 13, ConsoleColor.Blue);
 
@@ -88,9 +88,9 @@ namespace ST10449143PROG6221POEPart1
                         Program.PrintWithDelay("- Verify the source before taking any action.", 13, ConsoleColor.Blue);
                         break;
 
-                    case "how to safely browse the internet":
+                    case "how to safely browse the internet?":
                     case "how to browse the internet safely":
-                    case "how to browse the internet":
+                    case "how to browse the internet?":
                         Program.PrintWithDelay($"\nBrowsing the internet safely is crucial for your" +
                             $" online security {name}.", 13, ConsoleColor.Blue);
 
