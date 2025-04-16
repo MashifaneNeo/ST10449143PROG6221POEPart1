@@ -8,6 +8,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,14 +25,14 @@ jobs:
         dotnet-version: '9.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ST10449143PROG6221POEPart1/ST10449143PROG6221POEPart1.sln
 
     - name: Check code formatting
-      run: dotnet format --verify-no-changes
+      run: dotnet format ST10449143PROG6221POEPart1/ST10449143PROG6221POEPart1.sln --verify-no-changes
 
     - name: Build solution
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build ST10449143PROG6221POEPart1/ST10449143PROG6221POEPart1.sln --no-restore --configuration Release
 
     - name: Run tests (optional)
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ST10449143PROG6221POEPart1/ST10449143PROG6221POEPart1.sln --no-build --verbosity normal
       continue-on-error: true  # Remove if you want the build to fail on test errors
