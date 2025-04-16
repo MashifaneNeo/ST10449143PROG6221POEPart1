@@ -74,10 +74,12 @@ namespace ST10449143PROG6221POEPart1
         {
             if (File.Exists(audioFilePath))
             {
+#pragma warning disable CA1416
                 using (SoundPlayer player = new SoundPlayer(audioFilePath))
                 {
                     player.PlaySync();
                 }
+#pragma warning disable CA1416
             }
             else
             {
