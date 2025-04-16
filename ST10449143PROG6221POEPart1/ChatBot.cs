@@ -7,23 +7,30 @@ namespace ST10449143PROG6221POEPart1
     {
         public static void Launch(string name)
         {
+            // Start the chat session
             bool isFirstPrompt = true;
 
+            // While loop to keep the chat session running
             while (true)
             {
+                // Prompt the user for input
                 if (isFirstPrompt)
                 {
+                    // Print the initial prompt
                     Program.PrintWithDelay($"\nHi {name}, ask me something: ", 13, ConsoleColor.DarkYellow);
                     isFirstPrompt = false;
                 }
                 else
                 {
+                    // Print the follow-up prompt
                     Program.PrintWithDelay($"\nAsk me something else {name}: ", 13, ConsoleColor.DarkYellow);
                 }
 
+                // Read user input
                 string rawInput = Console.ReadLine() ?? "";
                 string input = rawInput.ToLower().Replace("’", "").Replace("'", "").Trim();
 
+                // switch statement to handle user input
                 switch (input)
                 {
                     case "how are you":
