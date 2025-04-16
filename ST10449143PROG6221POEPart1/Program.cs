@@ -9,7 +9,7 @@ using SixLabors.ImageSharp.Processing;
 
 namespace ST10449143PROG6221POEPart1
 {
-    class Program 
+    class Program
     {
         static void Main(string[] args)
         {
@@ -68,7 +68,7 @@ namespace ST10449143PROG6221POEPart1
             PrintWithDelay("===============================================", 13, ConsoleColor.Magenta);
             PrintWithDelay("        Welcome to the Cybersecurity Bot       ", 13, ConsoleColor.Magenta);
             PrintWithDelay("===============================================\n", 13, ConsoleColor.Magenta);
-        }  
+        }
 
         static void PlayGreetingAudio(string audioFilePath)
         {
@@ -79,7 +79,7 @@ namespace ST10449143PROG6221POEPart1
                 {
                     player.PlaySync();
                 }
-#pragma warning disable CA1416
+#pragma warning restore CA1416
             }
             else
             {
@@ -102,8 +102,6 @@ namespace ST10449143PROG6221POEPart1
             if (color.HasValue)
                 Console.ResetColor();
         }
+    }
+}
 
-        
-            }
-        }
-    
