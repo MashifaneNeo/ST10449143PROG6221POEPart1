@@ -87,12 +87,19 @@ namespace ST10449143PROG6221POEPart1
         {
             if (File.Exists(audioFilePath))
             {
-                //A warning is suppressed for the SoundPlayer class, as it may not be supported on all platforms
+                // A warning is suppressed for the SoundPlayer class, as it may not be supported on all platforms
 #pragma warning disable CA1416
-                using (SoundPlayer player = new SoundPlayer(audioFilePath))
+                try
                 {
-                    // Play the audio file synchronously
-                    player.PlaySync();
+                    using (SoundPlayer player = new SoundPlayer(audioFilePath))
+                    {
+                        // Play the audio file synchronously
+                        player.PlaySync();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    PrintWithDelay($"Error playing audio: {ex.Message}\n", 13, ConsoleColor.Red);
                 }
 #pragma warning restore CA1416
             }
