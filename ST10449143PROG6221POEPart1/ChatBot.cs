@@ -5,8 +5,11 @@ namespace ST10449143PROG6221POEPart1
 {
     public class ChatBot
     {
+        // Random number generator for selecting tips
         private static Random random = new Random();
+        // Stores the most recent topic discussed
         private static string lastTopic = "";
+        // Stores the user's favorite topic
         private static string favoriteTopic = "";
 
         // Dictionary of topics and their respective tips
@@ -102,6 +105,7 @@ namespace ST10449143PROG6221POEPart1
             }
         };
 
+        // Dictionary mapping keywords to topics
         private static Dictionary<string, string> keywordToTopic = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
             ["phishing"] = "phishing",
@@ -122,14 +126,16 @@ namespace ST10449143PROG6221POEPart1
             ["virtual private network"] = "vpn"
         };
 
+        // Method to launch the chatbot
         public static void Launch(string name)
         {
             ShowHelpMenu();
-
+            // Print a welcome message
             bool isFirstPrompt = true;
             ConsoleColor[] promptColors = { ConsoleColor.DarkYellow, ConsoleColor.DarkCyan, ConsoleColor.DarkMagenta, ConsoleColor.DarkGreen };
             int colorIndex = 0;
 
+            // Main loop for the chatbot
             while (true)
             {
                 ConsoleColor currentColor = promptColors[colorIndex % promptColors.Length];
@@ -150,7 +156,7 @@ namespace ST10449143PROG6221POEPart1
                     ProvideTipByTopic(lastTopic, name);
                     continue;
                 }
-
+                //detect if the user wants help
                 string detectedTopic = DetectTopic(input);
 
                 if (detectedTopic == "exit")
@@ -170,7 +176,7 @@ namespace ST10449143PROG6221POEPart1
                 }
             }
         }
-
+        /// Method to detect the topic based on user input
         private static string DetectTopic(string input)
         {
             foreach (var pair in keywordToTopic)
@@ -184,7 +190,7 @@ namespace ST10449143PROG6221POEPart1
 
             return null!;
         }
-
+        /// Method to provide a tip based on the topic
         private static void ProvideTipByTopic(string topic, string name)
         {
             var tips = topicTips[topic];
@@ -197,7 +203,7 @@ namespace ST10449143PROG6221POEPart1
             ConsoleColor color = tipColors[random.Next(tipColors.Length)];
             Program.PrintWithDelay($"\n{tip}", 13, color);
         }
-
+        /// Method to remember user information
         private static bool TryRememberUserInfo(string input, string name)
         {
             string[] phrases = { "i'm interested in ", "i am interested in ", "im interested in " };
@@ -217,6 +223,7 @@ namespace ST10449143PROG6221POEPart1
             return false;
         }
 
+        /// Method to respond to follow-up questions
         private static void RespondToFollowUp(string name)
         {
             string[] followUpResponses =
@@ -230,6 +237,7 @@ namespace ST10449143PROG6221POEPart1
             Program.PrintWithDelay($"\n{followUpResponses[random.Next(followUpResponses.Length)]}", 13, ConsoleColor.DarkCyan);
         }
 
+        /// Method to detect the user's sentiment
         private static void DetectSentiment(string input)
         {
             if (input.Contains("worried"))
