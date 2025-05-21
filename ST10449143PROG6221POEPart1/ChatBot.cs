@@ -176,7 +176,7 @@ namespace ST10449143PROG6221POEPart1
                 }
             }
         }
-        /// Method to detect the topic based on user input
+        //Method to detect the topic based on user input
         private static string DetectTopic(string input)
         {
             foreach (var pair in keywordToTopic)
@@ -190,7 +190,7 @@ namespace ST10449143PROG6221POEPart1
 
             return null!;
         }
-        /// Method to provide a tip based on the topic
+        //Method to provide a tip based on the topic
         private static void ProvideTipByTopic(string topic, string name)
         {
             var tips = topicTips[topic];
@@ -203,7 +203,7 @@ namespace ST10449143PROG6221POEPart1
             ConsoleColor color = tipColors[random.Next(tipColors.Length)];
             Program.PrintWithDelay($"\n{tip}", 13, color);
         }
-        /// Method to remember user information
+        // Method to remember user information
         private static bool TryRememberUserInfo(string input, string name)
         {
             string[] phrases = { "i'm interested in ", "i am interested in ", "im interested in " };
@@ -223,7 +223,7 @@ namespace ST10449143PROG6221POEPart1
             return false;
         }
 
-        /// Method to respond to follow-up questions
+        // Method to respond to follow-up questions
         private static void RespondToFollowUp(string name)
         {
             string[] followUpResponses =
@@ -237,7 +237,7 @@ namespace ST10449143PROG6221POEPart1
             Program.PrintWithDelay($"\n{followUpResponses[random.Next(followUpResponses.Length)]}", 13, ConsoleColor.DarkCyan);
         }
 
-        /// Method to detect the user's sentiment
+        // Method to detect the user's sentiment
         private static void DetectSentiment(string input)
         {
             if (input.Contains("worried"))
