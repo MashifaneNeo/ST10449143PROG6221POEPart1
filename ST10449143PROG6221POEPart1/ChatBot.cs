@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using System.Collections.Generic;
 
 namespace ST10449143PROG6221POEPart1
 {
@@ -9,104 +9,117 @@ namespace ST10449143PROG6221POEPart1
         private static string lastTopic = "";
         private static string favoriteTopic = "";
 
-        // --- Arrays of tips per topic ---
-        private static string[] phishingTips = new string[]
+        // Dictionary of topics and their respective tips
+        private static Dictionary<string, string[]> topicTips = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
         {
-            "Be cautious of emails asking for personal information. Scammers often disguise themselves as trusted organisations.",
-            "Hover over links to see where they lead before clicking. Phishing links often mimic real websites.",
-            "Watch for spelling mistakes and urgent language in emails – these are red flags for phishing.",
-            "Never download attachments or click on links from unknown senders.",
-            "Verify suspicious messages by contacting the sender through official channels, not by replying."
+            ["phishing"] = new[]
+            {
+                "Be cautious of emails asking for personal information. Scammers often disguise themselves as trusted organisations.",
+                "Hover over links to see where they lead before clicking. Phishing links often mimic real websites.",
+                "Watch for spelling mistakes and urgent language in emails – these are red flags for phishing.",
+                "Never download attachments or click on links from unknown senders.",
+                "Verify suspicious messages by contacting the sender through official channels, not by replying."
+            },
+            ["password"] = new[]
+            {
+                "Use a mix of upper/lowercase letters, numbers, and symbols in your passwords.",
+                "Avoid using the same password across multiple sites.",
+                "Consider using a password manager to store complex passwords securely.",
+                "Do not include your name or birthday in your password.",
+                "Change your passwords regularly to reduce risk."
+            },
+            ["scam"] = new[]
+            {
+                "Be skeptical of messages promising free money or prizes.",
+                "Scammers often create fake websites that look legitimate—check URLs carefully.",
+                "Don't share sensitive info over phone or email unless you're absolutely sure who you're talking to.",
+                "Never feel pressured to act immediately—pause and verify.",
+                "Check grammar and sender email addresses to spot scam attempts."
+            },
+            ["privacy"] = new[]
+            {
+                "Limit the amount of personal information you share online.",
+                "Review app permissions regularly and revoke unnecessary access.",
+                "Use private browsing modes to avoid trackers.",
+                "Be careful with location sharing on social media.",
+                "Turn off ad personalization features in your browser and apps."
+            },
+            ["encryption"] = new[]
+            {
+                "Use messaging apps that support end-to-end encryption.",
+                "Always check for HTTPS when entering sensitive data online.",
+                "Encrypt files and backups for sensitive data.",
+                "Disk encryption can protect data on stolen laptops.",
+                "VPNs also use encryption to secure data in transit."
+            },
+            ["firewall"] = new[]
+            {
+                "A firewall monitors incoming and outgoing traffic and blocks threats.",
+                "Use both hardware and software firewalls for better protection.",
+                "Don't disable your firewall when troubleshooting unless advised.",
+                "Firewalls help protect against unauthorized access from the internet.",
+                "Set strict firewall rules for better security on business networks."
+            },
+            ["antivirus"] = new[]
+            {
+                "Keep your antivirus definitions up to date.",
+                "Run regular system scans for threats.",
+                "Avoid pirated software—it may bypass antivirus protection.",
+                "Use real-time protection for instant detection.",
+                "Free antivirus can work, but paid versions usually offer more features."
+            },
+            ["backup"] = new[]
+            {
+                "Use the 3-2-1 backup rule: 3 copies, 2 different media, 1 offsite.",
+                "Schedule automatic backups to avoid forgetting.",
+                "Test your backups by restoring files occasionally.",
+                "Cloud backups protect you from physical disasters.",
+                "Use encryption for backups containing sensitive information."
+            },
+            ["twofactor"] = new[]
+            {
+                "2FA adds an extra layer of security beyond just your password.",
+                "Use an authenticator app instead of SMS when possible.",
+                "Enable 2FA on your email and financial accounts first.",
+                "Keep backup codes in a safe place.",
+                "2FA prevents access even if your password is stolen."
+            },
+            ["malware"] = new[]
+            {
+                "Avoid downloading software from unknown sources.",
+                "Don't click on suspicious ads or pop-ups.",
+                "Keep your system and software updated to patch vulnerabilities.",
+                "Use antivirus software to detect malware.",
+                "Run full scans if your device behaves strangely."
+            },
+            ["vpn"] = new[]
+            {
+                "VPNs encrypt your internet traffic to keep your data private.",
+                "Use a VPN on public Wi-Fi networks to prevent snooping.",
+                "Choose a VPN provider with a strict no-logs policy.",
+                "A VPN can help you access geo-restricted content.",
+                "Avoid free VPNs unless you've researched them well."
+            }
         };
 
-        private static string[] passwordTips = new string[]
+        private static Dictionary<string, string> keywordToTopic = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
-            "Use a mix of upper/lowercase letters, numbers, and symbols in your passwords.",
-            "Avoid using the same password across multiple sites.",
-            "Consider using a password manager to store complex passwords securely.",
-            "Do not include your name or birthday in your password.",
-            "Change your passwords regularly to reduce risk."
-        };
-
-        private static string[] scamTips = new string[]
-        {
-            "Be skeptical of messages promising free money or prizes.",
-            "Scammers often create fake websites that look legitimate—check URLs carefully.",
-            "Don't share sensitive info over phone or email unless you're absolutely sure who you're talking to.",
-            "Never feel pressured to act immediately—pause and verify.",
-            "Check grammar and sender email addresses to spot scam attempts."
-        };
-
-        private static string[] privacyTips = new string[]
-        {
-            "Limit the amount of personal information you share online.",
-            "Review app permissions regularly and revoke unnecessary access.",
-            "Use private browsing modes to avoid trackers.",
-            "Be careful with location sharing on social media.",
-            "Turn off ad personalization features in your browser and apps."
-        };
-
-        private static string[] encryptionTips = new string[]
-        {
-            "Use messaging apps that support end-to-end encryption.",
-            "Always check for HTTPS when entering sensitive data online.",
-            "Encrypt files and backups for sensitive data.",
-            "Disk encryption can protect data on stolen laptops.",
-            "VPNs also use encryption to secure data in transit."
-        };
-
-        private static string[] firewallTips = new string[]
-        {
-            "A firewall monitors incoming and outgoing traffic and blocks threats.",
-            "Use both hardware and software firewalls for better protection.",
-            "Don't disable your firewall when troubleshooting unless advised.",
-            "Firewalls help protect against unauthorized access from the internet.",
-            "Set strict firewall rules for better security on business networks."
-        };
-
-        private static string[] antivirusTips = new string[]
-        {
-            "Keep your antivirus definitions up to date.",
-            "Run regular system scans for threats.",
-            "Avoid pirated software—it may bypass antivirus protection.",
-            "Use real-time protection for instant detection.",
-            "Free antivirus can work, but paid versions usually offer more features."
-        };
-
-        private static string[] backupTips = new string[]
-        {
-            "Use the 3-2-1 backup rule: 3 copies, 2 different media, 1 offsite.",
-            "Schedule automatic backups to avoid forgetting.",
-            "Test your backups by restoring files occasionally.",
-            "Cloud backups protect you from physical disasters.",
-            "Use encryption for backups containing sensitive information."
-        };
-
-        private static string[] twoFactorTips = new string[]
-        {
-            "2FA adds an extra layer of security beyond just your password.",
-            "Use an authenticator app instead of SMS when possible.",
-            "Enable 2FA on your email and financial accounts first.",
-            "Keep backup codes in a safe place.",
-            "2FA prevents access even if your password is stolen."
-        };
-
-        private static string[] malwareTips = new string[]
-        {
-            "Avoid downloading software from unknown sources.",
-            "Don't click on suspicious ads or pop-ups.",
-            "Keep your system and software updated to patch vulnerabilities.",
-            "Use antivirus software to detect malware.",
-            "Run full scans if your device behaves strangely."
-        };
-
-        private static string[] vpnTips = new string[]
-        {
-            "VPNs encrypt your internet traffic to keep your data private.",
-            "Use a VPN on public Wi-Fi networks to prevent snooping.",
-            "Choose a VPN provider with a strict no-logs policy.",
-            "A VPN can help you access geo-restricted content.",
-            "Avoid free VPNs unless you've researched them well."
+            ["phishing"] = "phishing",
+            ["password"] = "password",
+            ["scam"] = "scam",
+            ["privacy"] = "privacy",
+            ["encryption"] = "encryption",
+            ["firewall"] = "firewall",
+            ["antivirus"] = "antivirus",
+            ["anti-virus"] = "antivirus",
+            ["backup"] = "backup",
+            ["backups"] = "backup",
+            ["2fa"] = "twofactor",
+            ["two factor"] = "twofactor",
+            ["two-factor"] = "twofactor",
+            ["malware"] = "malware",
+            ["vpn"] = "vpn",
+            ["virtual private network"] = "vpn"
         };
 
         public static void Launch(string name)
@@ -125,130 +138,112 @@ namespace ST10449143PROG6221POEPart1
                 Program.PrintWithDelay($"\n{(isFirstPrompt ? $"Hi {name}, ask me something: " : $"Ask me something else {name}: ")}", 13, currentColor);
                 isFirstPrompt = false;
 
-                string rawInput = Console.ReadLine() ?? "";
-                string input = rawInput.ToLower().Replace("?", "").Trim();
+                string input = (Console.ReadLine() ?? "").ToLower().Replace("?", "").Trim();
 
-                // Respond empathetically to sentiment
                 DetectSentiment(input);
 
                 if (TryRememberUserInfo(input, name)) continue;
 
                 if ((input.Contains("more") || input.Contains("another") || input.Contains("again") || input.Contains("explain") || input.Contains("confused")) && !string.IsNullOrEmpty(lastTopic))
                 {
+                    RespondToFollowUp(name);
                     ProvideTipByTopic(lastTopic, name);
                     continue;
                 }
 
-                if (input.Contains("password")) lastTopic = "password";
-                else if (input.Contains("phishing")) lastTopic = "phishing";
-                else if (input.Contains("scam")) lastTopic = "scam";
-                else if (input.Contains("privacy")) lastTopic = "privacy";
-                else if (input.Contains("encryption")) lastTopic = "encryption";
-                else if (input.Contains("firewall")) lastTopic = "firewall";
-                else if (input.Contains("antivirus") || input.Contains("anti-virus")) lastTopic = "antivirus";
-                else if (input.Contains("backup") || input.Contains("backups")) lastTopic = "backup";
-                else if (input.Contains("two-factor") || input.Contains("two factor") || input.Contains("2fa")) lastTopic = "twofactor";
-                else if (input.Contains("malware")) lastTopic = "malware";
-                else if (input.Contains("vpn") || input.Contains("virtual private network")) lastTopic = "vpn";
-                else if (input.Contains("exit") || input.Contains("quit"))
+                string detectedTopic = DetectTopic(input);
+
+                if (detectedTopic == "exit")
                 {
                     Program.PrintWithDelay($"\nGoodbye, {name}! Stay safe online!", 13, ConsoleColor.Green);
                     return;
                 }
+
+                if (!string.IsNullOrEmpty(detectedTopic) && topicTips.ContainsKey(detectedTopic))
+                {
+                    lastTopic = detectedTopic;
+                    ProvideTipByTopic(detectedTopic, name);
+                }
                 else
                 {
-                    Program.PrintWithDelay($"\nSorry {name}, I didn't understand that." +
-                        $" Please rephrase or ask a about a different topic.", 13, ConsoleColor.Red);
-                    continue;
+                    Program.PrintWithDelay($"\nSorry {name}, I didn't understand that. You can also say 'more' or 'explain' to continue our last topic.", 13, ConsoleColor.Red);
                 }
-
-                ProvideTipByTopic(lastTopic, name);
             }
+        }
+
+        private static string DetectTopic(string input)
+        {
+            foreach (var pair in keywordToTopic)
+            {
+                if (input.Contains(pair.Key))
+                    return pair.Value;
+            }
+
+            if (input.Contains("exit") || input.Contains("quit"))
+                return "exit";
+
+            return null!;
+        }
+
+        private static void ProvideTipByTopic(string topic, string name)
+        {
+            var tips = topicTips[topic];
+            string tip = tips[random.Next(tips.Length)];
+
+            if (!string.IsNullOrEmpty(favoriteTopic) && topic.Equals(favoriteTopic, StringComparison.OrdinalIgnoreCase))
+                Program.PrintWithDelay($"\nSince you're interested in {favoriteTopic}, here's something you might like:", 13, ConsoleColor.Red);
+
+            ConsoleColor[] tipColors = { ConsoleColor.Cyan, ConsoleColor.Blue, ConsoleColor.White, ConsoleColor.Magenta };
+            ConsoleColor color = tipColors[random.Next(tipColors.Length)];
+            Program.PrintWithDelay($"\n{tip}", 13, color);
         }
 
         private static bool TryRememberUserInfo(string input, string name)
         {
-            if (input.StartsWith("i'm interested in ") || input.StartsWith("i am interested in ") || input.StartsWith("im interested in "))
+            string[] phrases = { "i'm interested in ", "i am interested in ", "im interested in " };
+            foreach (var phrase in phrases)
             {
-                string topic = input.Replace("i'm interested in ", "").Replace("i am interested in ", "").Replace("im interested in ", "").Trim();
-                if (IsKnownTopic(topic))
+                if (input.StartsWith(phrase))
                 {
-                    favoriteTopic = topic;
-                    Program.PrintWithDelay($"\nGreat! I'll remember that you're interested in {favoriteTopic}. It's a crucial part of staying safe online.", 13, ConsoleColor.Red);
-                    return true;
+                    string topic = input.Replace(phrase, "").Trim();
+                    if (topicTips.ContainsKey(topic))
+                    {
+                        favoriteTopic = topic;
+                        Program.PrintWithDelay($"\nGreat! I'll remember that you're interested in {favoriteTopic}. It's a crucial part of staying safe online.", 13, ConsoleColor.Red);
+                        return true;
+                    }
                 }
             }
             return false;
         }
 
+        private static void RespondToFollowUp(string name)
+        {
+            string[] followUpResponses =
+            {
+                $"Certainly, {name}. Here's another useful insight:",
+                $"Absolutely, let me explain more with this next one:",
+                $"Sure thing, {name}. This should help clarify:",
+                $"Of course! Here’s something more to consider:",
+                $"Let me give you another helpful point, {name}:"
+            };
+            Program.PrintWithDelay($"\n{followUpResponses[random.Next(followUpResponses.Length)]}", 13, ConsoleColor.DarkCyan);
+        }
+
         private static void DetectSentiment(string input)
         {
             if (input.Contains("worried"))
-            {
-                Program.PrintWithDelay("\nIt's completely understandable to feel that way. Cyber threats can seem overwhelming. Let me share some tips to help you stay safe.", 13, ConsoleColor.Magenta);
-            }
+                Program.PrintWithDelay("\nIt's okay to feel worried. Here's something that might help.", 13, ConsoleColor.Magenta);
             else if (input.Contains("curious"))
-            {
-                Program.PrintWithDelay("\nI love curiosity! Exploring cybersecurity is the first step to becoming more informed and protected.", 13, ConsoleColor.Yellow);
-            }
+                Program.PrintWithDelay("\nCuriosity is great! Here's something to explore.", 13, ConsoleColor.Yellow);
             else if (input.Contains("frustrated"))
-            {
-                Program.PrintWithDelay("\nI'm here to help, even when things get frustrating. Cybersecurity can be tricky, but you're not alone!", 13, ConsoleColor.Blue);
-            }
+                Program.PrintWithDelay("\nCybersecurity can be frustrating. Here's a helpful tip.", 13, ConsoleColor.Blue);
             else if (input.Contains("confused"))
-            {
-                Program.PrintWithDelay("\nNo worries! Cybersecurity concepts can be tricky at first. Feel free to ask me to explain anything in more detail.", 13, ConsoleColor.Cyan);
-            }
+                Program.PrintWithDelay("\nIt’s okay to be confused. Let me clarify with a tip.", 13, ConsoleColor.Cyan);
             else if (input.Contains("thankful") || input.Contains("thanks") || input.Contains("thank you"))
-            {
-                Program.PrintWithDelay("\nYou're welcome! I'm glad I could help you learn about cybersecurity.", 13, ConsoleColor.Green);
-            }
+                Program.PrintWithDelay("\nYou're welcome! Here's another tip you might like.", 13, ConsoleColor.Green);
             else if (input.Contains("anxious"))
-            {
-                Program.PrintWithDelay("\nIt's normal to feel anxious about cybersecurity. Taking small steps to learn can make you feel more in control.", 13, ConsoleColor.DarkYellow);
-            }
-            else if (input.Contains("excited"))
-            {
-                Program.PrintWithDelay("\nThat's awesome! Staying excited about learning helps you stay ahead in cybersecurity.", 13, ConsoleColor.Magenta);
-            }
-        }
-
-        private static bool IsKnownTopic(string topic)
-        {
-            string t = topic.ToLower();
-            return t == "password" || t == "phishing" || t == "scam" || t == "privacy" || t == "encryption" ||
-                   t == "firewall" || t == "antivirus" || t == "backup" || t == "two-factor" ||
-                   t == "2fa" || t == "malware" || t == "vpn";
-        }
-
-        private static void ProvideTipByTopic(string topic, string name)
-        {
-            ConsoleColor[] tipColors = { ConsoleColor.Cyan, ConsoleColor.Blue, ConsoleColor.White, ConsoleColor.Magenta };
-            ConsoleColor currentTipColor = tipColors[random.Next(tipColors.Length)];
-
-            if (!string.IsNullOrEmpty(favoriteTopic) && topic.ToLower().Contains(favoriteTopic.ToLower()))
-            {
-                Program.PrintWithDelay($"\nSince you're interested in {favoriteTopic}, here's a tip:", 13, ConsoleColor.Red);
-            }
-
-            string[] tips = topic switch
-            {
-                "phishing" => phishingTips,
-                "password" => passwordTips,
-                "scam" => scamTips,
-                "privacy" => privacyTips,
-                "encryption" => encryptionTips,
-                "firewall" => firewallTips,
-                "antivirus" => antivirusTips,
-                "backup" => backupTips,
-                "twofactor" => twoFactorTips,
-                "malware" => malwareTips,
-                "vpn" => vpnTips,
-                _ => new string[] { "Sorry, I don’t have tips for that topic." }
-            };
-
-            string selectedTip = tips[random.Next(tips.Length)];
-            Program.PrintWithDelay($"\nTip: {selectedTip}", 13, currentTipColor);
+                Program.PrintWithDelay("\nLearning helps with anxiety. Here's something reassuring.", 13, ConsoleColor.DarkYellow);
         }
 
         private static void ShowHelpMenu()
