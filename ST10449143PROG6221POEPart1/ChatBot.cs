@@ -252,6 +252,8 @@ namespace ST10449143PROG6221POEPart1
                 Program.PrintWithDelay("\nYou're welcome! Here's another tip you might like.", 13, ConsoleColor.Green);
             else if (input.Contains("anxious"))
                 Program.PrintWithDelay("\nLearning helps with anxiety. Here's something reassuring.", 13, ConsoleColor.DarkYellow);
+            else if (input.Contains("excited"))
+                Program.PrintWithDelay("\nIt's awesome to see your excitement! Here's something to keep that energy going!", 13, ConsoleColor.Magenta);
         }
 
         private static void ShowHelpMenu()
