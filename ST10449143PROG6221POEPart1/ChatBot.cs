@@ -17,91 +17,91 @@ namespace ST10449143PROG6221POEPart1
         {
             ["phishing"] = new[]
             {
-                "Be cautious of emails asking for personal information. Scammers often disguise themselves as trusted organisations.",
-                "Hover over links to see where they lead before clicking. Phishing links often mimic real websites.",
-                "Watch for spelling mistakes and urgent language in emails – these are red flags for phishing.",
-                "Never download attachments or click on links from unknown senders.",
-                "Verify suspicious messages by contacting the sender through official channels, not by replying."
+                 "Be cautious of emails asking for personal information. Scammers often disguise themselves as trusted organisations and this is the method that is most udes to mislead people.",
+                 "Hover over links to see where they lead before clicking. Phishing links often mimic real websites to confuse you into thinking that the website is authentic.",
+                 "Watch out for spelling mistakes and urgent language in emails – these are red flags for phishing.",
+                 "Be cautious of the content you want to download on the internet. Never download attachments or click on links from unknown senders.",
+                 "Verify suspicious messages by contacting the sender through official channels, through this you can prevent the chances of being a victim of phishing."                
             },
             ["password"] = new[]
             {
-                "Use a mix of upper/lowercase letters, numbers, and symbols in your passwords.",
-                "Avoid using the same password across multiple sites.",
-                "Consider using a password manager to store complex passwords securely.",
-                "Do not include your name or birthday in your password.",
-                "Change your passwords regularly to reduce risk."
+                 "Use a mix of letters, numbers, and symbols in your passwords. Avoid using easily guessable information like birthdays or names.",
+                 "Use a password manager to generate and store complex passwords. Reusing passwords increases the risk if one site gets compromised.",
+                 "Change your passwords regularly, especially for sensitive accounts. Strong passwords are a critical first defense against cyber threats.",
+                 "Enusure that all your passwords are atleast 8 characters long and include special characters in them as well to increase the diffuculty of a security breach.",
+                 "Don't share your passwords with anyone, even if they claim to be from a trusted source. Always keep your passwords confidential."
             },
             ["scam"] = new[]
             {
-                "Be skeptical of messages promising free money or prizes.",
-                "Scammers often create fake websites that look legitimate—check URLs carefully.",
-                "Don't share sensitive info over phone or email unless you're absolutely sure who you're talking to.",
-                "Never feel pressured to act immediately—pause and verify.",
-                "Check grammar and sender email addresses to spot scam attempts."
+                "Scammers often impersonate trusted sources to trick you. Always verify the identity of the person or organization before sharing information.",
+                "Be cautious of messages that create urgency, like saying your account will be locked. Scammers use fear to make you act quickly without thinking.",
+                "Never click on suspicious links or download unknown attachments. Scams can come through email, SMS, or even phone calls.",
+                "Research unfamiliar companies before engaging with them. A quick search can reveal red flags or scam warnings from others.",
+                "Always trust your instincts. If something feels off or too good to be true, then it is most likely a scam."
             },
             ["privacy"] = new[]
             {
-                "Limit the amount of personal information you share online.",
-                "Review app permissions regularly and revoke unnecessary access.",
-                "Use private browsing modes to avoid trackers.",
-                "Be careful with location sharing on social media.",
-                "Turn off ad personalization features in your browser and apps."
+                "Limit what you share on social media and review your privacy settings. Oversharing can expose you to identity theft or stalking.",
+                "Use encrypted messaging apps to protect your conversations. Privacy-focused tools give you better control over your data.",
+                "Avoid using public Wi-Fi for sensitive transactions. Your data can be easily intercepted on unsecured networks.",
+                "Use private browsing or incognito mode to minimize tracking. While not foolproof, it helps reduce your online footprint.",
+                "Turn off location sharing for apps that don’t need it. Constant GPS tracking can reveal patterns about your movements."
             },
             ["encryption"] = new[]
             {
-                "Use messaging apps that support end-to-end encryption.",
-                "Always check for HTTPS when entering sensitive data online.",
-                "Encrypt files and backups for sensitive data.",
-                "Disk encryption can protect data on stolen laptops.",
-                "VPNs also use encryption to secure data in transit."
+                "Encryption scrambles your data so only authorized parties can read it. It’s essential for protecting sensitive information.",
+                "Use end-to-end encrypted services for messaging and file storage. Without encryption, your data is vulnerable during transmission.",
+                "Always encrypt your device if it contains sensitive data. This ensures that even if stolen, the information remains protected.",
+                "Look for HTTPS in your browser's address bar when entering sensitive info. This means your connection is encrypted.",
+                "Consider full disk encryption for laptops and portable drives. This protects all files, not just selected ones."
             },
             ["firewall"] = new[]
             {
-                "A firewall monitors incoming and outgoing traffic and blocks threats.",
-                "Use both hardware and software firewalls for better protection.",
-                "Don't disable your firewall when troubleshooting unless advised.",
-                "Firewalls help protect against unauthorized access from the internet.",
-                "Set strict firewall rules for better security on business networks."
+                "A firewall filters incoming and outgoing traffic, blocking potentially dangerous connections. It acts as a protective barrier for your network.",
+                "Configure your firewall to block unauthorized access while allowing legitimate communication. Many systems include built-in firewalls—make sure they're turned on.",
+                "Firewalls can prevent malware from communicating with command centers. Keeping them active adds a critical layer of defense.",
+                "Use both software and hardware firewalls for layered protection. This reduces your risk if one layer fails.",
+                "Review your firewall logs regularly. This can reveal unusual activity or attempted intrusions."
             },
             ["antivirus"] = new[]
             {
-                "Keep your antivirus definitions up to date.",
-                "Run regular system scans for threats.",
-                "Avoid pirated software—it may bypass antivirus protection.",
-                "Use real-time protection for instant detection.",
-                "Free antivirus can work, but paid versions usually offer more features."
+                "Antivirus software scans your system for malicious programs. It helps prevent, detect, and remove threats like viruses and trojans.",
+                "Keep your antivirus updated so it can recognize the latest threats. New malware appears daily, so updates are essential.",
+                "Use real-time scanning and run full scans periodically. Antivirus alone isn’t foolproof, but it significantly reduces risk.",
+                "Avoid disabling your antivirus, even temporarily. Threats can strike at any time, especially when downloading files.",
+                "Choose antivirus software that includes web protection. It can block dangerous websites before they harm your system."
             },
             ["backup"] = new[]
             {
-                "Use the 3-2-1 backup rule: 3 copies, 2 different media, 1 offsite.",
-                "Schedule automatic backups to avoid forgetting.",
-                "Test your backups by restoring files occasionally.",
-                "Cloud backups protect you from physical disasters.",
-                "Use encryption for backups containing sensitive information."
+                "Regularly back up your data to an external drive or secure cloud service. This protects your information in case of hardware failure or cyberattack.",
+                "Use automated backups to ensure consistency. Don't wait until disaster strikes to realize your important files are gone.",
+                "Test your backups to ensure they can be restored. A backup is only useful if it actually works when you need it.",
+                "Follow the 3-2-1 rule: three copies of data, on two types of media, with one offsite. This strategy minimizes data loss.",
+                "Encrypt your backups, especially if stored in the cloud. This protects them from unauthorized access."
             },
             ["twofactor"] = new[]
             {
-                "2FA adds an extra layer of security beyond just your password.",
-                "Use an authenticator app instead of SMS when possible.",
-                "Enable 2FA on your email and financial accounts first.",
-                "Keep backup codes in a safe place.",
-                "2FA prevents access even if your password is stolen."
+                "Two-factor authentication (2FA) adds an extra layer of security by requiring a second form of verification. This makes it harder for attackers to access your account even if they have your password.",
+                "Use app-based 2FA like Google Authenticator instead of SMS when possible. It's more secure and less vulnerable to SIM swapping.",
+                "Enable 2FA on all accounts that support it, especially email, banking, and social media. It’s a simple way to strengthen your security.",
+                "Do not share your 2FA codes with anyone. Legitimate services will never ask for them.",
+                "Back up your 2FA codes or recovery keys. Losing access to your authenticator app can lock you out of your accounts."
             },
             ["malware"] = new[]
             {
-                "Avoid downloading software from unknown sources.",
-                "Don't click on suspicious ads or pop-ups.",
-                "Keep your system and software updated to patch vulnerabilities.",
-                "Use antivirus software to detect malware.",
-                "Run full scans if your device behaves strangely."
+                "Malware is software designed to harm or exploit any programmable device or network. It includes viruses, ransomware, spyware, and more.",
+                "Avoid downloading files or clicking links from untrusted sources. Malware often disguises itself as legitimate software.",
+                "Keep your operating system and software up to date. Security patches fix vulnerabilities that malware can exploit.",
+                "Be cautious of fake updates or pop-ups claiming your device is infected. These are often tricks to install malware.",
+                "Use behavior-based malware protection when possible. It can detect threats based on unusual activity, not just known signatures."
             },
             ["vpn"] = new[]
             {
-                "VPNs encrypt your internet traffic to keep your data private.",
-                "Use a VPN on public Wi-Fi networks to prevent snooping.",
-                "Choose a VPN provider with a strict no-logs policy.",
-                "A VPN can help you access geo-restricted content.",
-                "Avoid free VPNs unless you've researched them well."
+                "A VPN encrypts your internet connection, making your online activity private. It’s especially useful when using public Wi-Fi.",
+                "Choose a trustworthy VPN provider with a no-logs policy. Some free VPNs may log or sell your data.",
+                "VPNs help you bypass geo-restrictions and reduce tracking, but they don’t make you invincible. Combine them with other security practices.",
+                "Avoid using free VPNs for sensitive activities. They may lack proper encryption or contain ads and tracking software.",
+                "Always connect to servers in privacy-friendly jurisdictions when possible. Some countries have laws requiring data retention."
             }
         };
 
@@ -165,6 +165,12 @@ namespace ST10449143PROG6221POEPart1
                     return;
                 }
 
+                if (detectedTopic == "help")
+                {
+                    ShowHelpMenu();
+                    continue;
+                }
+
                 if (!string.IsNullOrEmpty(detectedTopic) && topicTips.ContainsKey(detectedTopic))
                 {
                     lastTopic = detectedTopic;
@@ -172,7 +178,8 @@ namespace ST10449143PROG6221POEPart1
                 }
                 else
                 {
-                    Program.PrintWithDelay($"\nSorry {name}, I didn't understand that. You can also say 'more' or 'explain' to continue our last topic.", 13, ConsoleColor.Red);
+                    Program.PrintWithDelay($"\nSorry {name}, I didn't understand that. " +
+                        $"Please rephrase or ask about a different topic.", 13, ConsoleColor.Red);
                 }
             }
         }
@@ -187,6 +194,10 @@ namespace ST10449143PROG6221POEPart1
 
             if (input.Contains("exit") || input.Contains("quit"))
                 return "exit";
+
+            // Detect help-related phrases like "what can I ask" or "help"
+            if (input.Contains("what can i ask") || input.Contains("help") || input.Contains("ask you"))
+                return "help";
 
             return null!;
         }
@@ -241,19 +252,23 @@ namespace ST10449143PROG6221POEPart1
         private static void DetectSentiment(string input)
         {
             if (input.Contains("worried"))
-                Program.PrintWithDelay("\nIt's okay to feel worried. Here's something that might help.", 13, ConsoleColor.Magenta);
+                Program.PrintWithDelay("\nIt's okay to feel worried. Cerain topics can be hard to understand, here's something that might help you understand better.", 13, ConsoleColor.Magenta);
             else if (input.Contains("curious"))
-                Program.PrintWithDelay("\nCuriosity is great! Here's something to explore.", 13, ConsoleColor.Yellow);
+                Program.PrintWithDelay("\nCuriosity is great thing! Here's something to aid you in exploring your curiousity.", 13, ConsoleColor.Yellow);
             else if (input.Contains("frustrated"))
-                Program.PrintWithDelay("\nCybersecurity can be frustrating. Here's a helpful tip.", 13, ConsoleColor.Blue);
-            else if (input.Contains("confused"))
-                Program.PrintWithDelay("\nIt’s okay to be confused. Let me clarify with a tip.", 13, ConsoleColor.Cyan);
+                Program.PrintWithDelay("\nCybersecurity can be frustrating at times. Here's a helpful tip to ease your frustration.", 13, ConsoleColor.Blue);            
             else if (input.Contains("thankful") || input.Contains("thanks") || input.Contains("thank you"))
-                Program.PrintWithDelay("\nYou're welcome! Here's another tip you might like.", 13, ConsoleColor.Green);
+                Program.PrintWithDelay("\nThats good to hear! being thankful for knowledge is a great thing. Here's another tip you might like.", 13, ConsoleColor.Green);
             else if (input.Contains("anxious"))
-                Program.PrintWithDelay("\nLearning helps with anxiety. Here's something reassuring.", 13, ConsoleColor.DarkYellow);
+                Program.PrintWithDelay("\nI am so sorry to hear that. Learning helps with anxiety, here's something reassuring.", 13, ConsoleColor.DarkYellow);
             else if (input.Contains("excited"))
-                Program.PrintWithDelay("\nIt's awesome to see your excitement! Here's something to keep that energy going!", 13, ConsoleColor.Magenta);
+                Program.PrintWithDelay("\nIt's awesome to see your excitement! Here's something to keep that energy going!", 13, ConsoleColor.Gray);
+            else if (input.Contains("scared"))
+                Program.PrintWithDelay("\nBeing scared is a natural thing in cybersecurity! heres a tip to help you be less scared.", 13, ConsoleColor.Cyan);
+            else if (input.Contains("uninterested"))
+                Program.PrintWithDelay("\nThats not good. But its understandable to lose interest about this topic, maybe this can reignite your interest.", 13, ConsoleColor.Red);
+            else if (input.Contains("unsure"))
+                Program.PrintWithDelay("\nThats perfectly fine! These types of topics are quite complex, lets help you understand further.", 13, ConsoleColor.DarkGreen);
         }
 
         private static void ShowHelpMenu()
@@ -267,7 +282,8 @@ namespace ST10449143PROG6221POEPart1
             Program.PrintWithDelay("║ You can also tell me:                                               ║", 0, ConsoleColor.DarkGreen);
             Program.PrintWithDelay("║  - How you feel about Cybersecurity like:                           ║", 0, ConsoleColor.DarkGreen);
             Program.PrintWithDelay("║    worried, curious, frustrated, confused,                          ║", 0, ConsoleColor.DarkGreen);
-            Program.PrintWithDelay("║    thankful, anxious and excited                                    ║", 0, ConsoleColor.DarkGreen);
+            Program.PrintWithDelay("║    thankful, anxious, excited, scared,                              ║", 0, ConsoleColor.DarkGreen);
+            Program.PrintWithDelay("║    uninterested and unsure                                          ║", 0, ConsoleColor.DarkGreen);
             Program.PrintWithDelay("║  - Cybersecurity topics you're interested in                        ║", 0, ConsoleColor.DarkGreen);
             Program.PrintWithDelay("║  - 'more', 'another', or 'explain' to get another tip on a topic    ║", 0, ConsoleColor.DarkGreen);
             Program.PrintWithDelay("║  - 'exit' or 'quit' to close the chatbot                            ║", 0, ConsoleColor.DarkGreen);
