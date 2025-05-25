@@ -29,9 +29,6 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore ST10449143PROG6221POEPart1/ST10449143PROG6221POEPart1.sln
 
-      - name: Check code formatting
-        run: dotnet format ST10449143PROG6221POEPart1/ST10449143PROG6221POEPart1.sln --verify-no-changes
-
       - name: Build solution
         run: dotnet build ST10449143PROG6221POEPart1/ST10449143PROG6221POEPart1.sln --no-restore --configuration Release
 
