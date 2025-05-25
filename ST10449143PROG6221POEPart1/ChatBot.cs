@@ -252,23 +252,23 @@ namespace ST10449143PROG6221POEPart1
         private static void DetectSentiment(string input)
         {
             if (input.Contains("worried"))
-                Program.PrintWithDelay("\nIt's okay to feel worried. Cerain topics can be hard to understand, here's something that might help you understand better.", 13, ConsoleColor.Magenta);
+                Program.PrintWithDelay("\nIt's okay to feel worried. Cerain topics can be hard to understand, here's something that might help you understand better:", 13, ConsoleColor.Magenta);
             else if (input.Contains("curious"))
-                Program.PrintWithDelay("\nCuriosity is great thing! Here's something to aid you in exploring your curiousity.", 13, ConsoleColor.Yellow);
+                Program.PrintWithDelay("\nCuriosity is great thing! Here's something to aid you in exploring your curiousity:", 13, ConsoleColor.Yellow);
             else if (input.Contains("frustrated"))
-                Program.PrintWithDelay("\nCybersecurity can be frustrating at times. Here's a helpful tip to ease your frustration.", 13, ConsoleColor.Blue);            
+                Program.PrintWithDelay("\nCybersecurity can be frustrating at times. Here's a helpful tip to ease your frustration:", 13, ConsoleColor.Blue);            
             else if (input.Contains("thankful") || input.Contains("thanks") || input.Contains("thank you"))
-                Program.PrintWithDelay("\nThats good to hear! being thankful for knowledge is a great thing. Here's another tip you might like.", 13, ConsoleColor.Green);
+                Program.PrintWithDelay("\nThats good to hear! being thankful for knowledge is a great thing. Here's another tip you might like:", 13, ConsoleColor.Green);
             else if (input.Contains("anxious"))
-                Program.PrintWithDelay("\nI am so sorry to hear that. Learning helps with anxiety, here's something reassuring.", 13, ConsoleColor.DarkYellow);
+                Program.PrintWithDelay("\nI am so sorry to hear that. Learning helps with anxiety, here's something reassuring:", 13, ConsoleColor.DarkYellow);
             else if (input.Contains("excited"))
-                Program.PrintWithDelay("\nIt's awesome to see your excitement! Here's something to keep that energy going!", 13, ConsoleColor.Gray);
+                Program.PrintWithDelay("\nIt's awesome to see your excitement! Here's something to keep that energy going:", 13, ConsoleColor.Gray);
             else if (input.Contains("scared"))
-                Program.PrintWithDelay("\nBeing scared is a natural thing in cybersecurity! heres a tip to help you be less scared.", 13, ConsoleColor.Cyan);
+                Program.PrintWithDelay("\nBeing scared is a natural thing in cybersecurity! heres a tip to help you be less scared:", 13, ConsoleColor.Cyan);
             else if (input.Contains("uninterested"))
-                Program.PrintWithDelay("\nThats not good. But its understandable to lose interest about this topic, maybe this can reignite your interest.", 13, ConsoleColor.Red);
+                Program.PrintWithDelay("\nThats not good. But its understandable to lose interest about this topic, maybe this can reignite your interest:", 13, ConsoleColor.Red);
             else if (input.Contains("unsure"))
-                Program.PrintWithDelay("\nThats perfectly fine! These types of topics are quite complex, lets help you understand further.", 13, ConsoleColor.DarkGreen);
+                Program.PrintWithDelay("\nThats perfectly fine! These types of topics are quite complex, lets help you understand further:", 13, ConsoleColor.DarkGreen);
         }
 
         private static void ShowHelpMenu()
