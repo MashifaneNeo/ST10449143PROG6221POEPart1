@@ -12,6 +12,11 @@ namespace ST10449143PROG6221POEPart1
         // Stores the user's favorite topic
         private static string favoriteTopic = "";
 
+        // Dictionary to track which tips have been shown for each topic
+        private static Dictionary<string, Queue<int>> shownTipIndices = new Dictionary<string, Queue<int>>();
+        // Dictionary to track the current tip index for each topic
+        private static Dictionary<string, int> currentTipIndex = new Dictionary<string, int>();
+
         // Dictionary of topics and their respective tips
         private static Dictionary<string, string[]> topicTips = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
         {
@@ -19,9 +24,9 @@ namespace ST10449143PROG6221POEPart1
             {
                  "Be cautious of emails asking for personal information. Scammers often disguise themselves as trusted organisations and this is the method that is most udes to mislead people.",
                  "Hover over links to see where they lead before clicking. Phishing links often mimic real websites to confuse you into thinking that the website is authentic.",
-                 "Watch out for spelling mistakes and urgent language in emails – these are red flags for phishing.",
+                 "Watch out for spelling mistakes and urgent language in emails – these are red flags for phishing and are major indication that there is phishing involved.",
                  "Be cautious of the content you want to download on the internet. Never download attachments or click on links from unknown senders.",
-                 "Verify suspicious messages by contacting the sender through official channels, through this you can prevent the chances of being a victim of phishing."                
+                 "Verify suspicious messages by contacting the sender through official channels, through this you can prevent the chances of being a victim of phishing."
             },
             ["password"] = new[]
             {
@@ -45,11 +50,11 @@ namespace ST10449143PROG6221POEPart1
                 "Use encrypted messaging apps to protect your conversations. Privacy-focused tools give you better control over your data.",
                 "Avoid using public Wi-Fi for sensitive transactions. Your data can be easily intercepted on unsecured networks.",
                 "Use private browsing or incognito mode to minimize tracking. While not foolproof, it helps reduce your online footprint.",
-                "Turn off location sharing for apps that don’t need it. Constant GPS tracking can reveal patterns about your movements."
+                "Turn off location sharing for apps that don't need it. Constant GPS tracking can reveal patterns about your movements."
             },
             ["encryption"] = new[]
             {
-                "Encryption scrambles your data so only authorized parties can read it. It’s essential for protecting sensitive information.",
+                "Encryption scrambles your data so only authorized parties can read it. It's essential for protecting sensitive information.",
                 "Use end-to-end encrypted services for messaging and file storage. Without encryption, your data is vulnerable during transmission.",
                 "Always encrypt your device if it contains sensitive data. This ensures that even if stolen, the information remains protected.",
                 "Look for HTTPS in your browser's address bar when entering sensitive info. This means your connection is encrypted.",
@@ -67,7 +72,7 @@ namespace ST10449143PROG6221POEPart1
             {
                 "Antivirus software scans your system for malicious programs. It helps prevent, detect, and remove threats like viruses and trojans.",
                 "Keep your antivirus updated so it can recognize the latest threats. New malware appears daily, so updates are essential.",
-                "Use real-time scanning and run full scans periodically. Antivirus alone isn’t foolproof, but it significantly reduces risk.",
+                "Use real-time scanning and run full scans periodically. Antivirus alone isn't foolproof, but it significantly reduces risk.",
                 "Avoid disabling your antivirus, even temporarily. Threats can strike at any time, especially when downloading files.",
                 "Choose antivirus software that includes web protection. It can block dangerous websites before they harm your system."
             },
@@ -83,7 +88,7 @@ namespace ST10449143PROG6221POEPart1
             {
                 "Two-factor authentication (2FA) adds an extra layer of security by requiring a second form of verification. This makes it harder for attackers to access your account even if they have your password.",
                 "Use app-based 2FA like Google Authenticator instead of SMS when possible. It's more secure and less vulnerable to SIM swapping.",
-                "Enable 2FA on all accounts that support it, especially email, banking, and social media. It’s a simple way to strengthen your security.",
+                "Enable 2FA on all accounts that support it, especially email, banking, and social media. It's a simple way to strengthen your security.",
                 "Do not share your 2FA codes with anyone. Legitimate services will never ask for them.",
                 "Back up your 2FA codes or recovery keys. Losing access to your authenticator app can lock you out of your accounts."
             },
@@ -97,9 +102,9 @@ namespace ST10449143PROG6221POEPart1
             },
             ["vpn"] = new[]
             {
-                "A VPN encrypts your internet connection, making your online activity private. It’s especially useful when using public Wi-Fi.",
+                "A VPN encrypts your internet connection, making your online activity private. It's especially useful when using public Wi-Fi.",
                 "Choose a trustworthy VPN provider with a no-logs policy. Some free VPNs may log or sell your data.",
-                "VPNs help you bypass geo-restrictions and reduce tracking, but they don’t make you invincible. Combine them with other security practices.",
+                "VPNs help you bypass geo-restrictions and reduce tracking, but they don't make you invincible. Combine them with other security practices.",
                 "Avoid using free VPNs for sensitive activities. They may lack proper encryption or contain ads and tracking software.",
                 "Always connect to servers in privacy-friendly jurisdictions when possible. Some countries have laws requiring data retention."
             }
@@ -134,6 +139,13 @@ namespace ST10449143PROG6221POEPart1
             bool isFirstPrompt = true;
             ConsoleColor[] promptColors = { ConsoleColor.DarkYellow, ConsoleColor.DarkCyan, ConsoleColor.DarkMagenta, ConsoleColor.DarkGreen };
             int colorIndex = 0;
+
+            // Initialize the tip tracking dictionaries
+            foreach (var topic in topicTips.Keys)
+            {
+                shownTipIndices[topic] = new Queue<int>();
+                currentTipIndex[topic] = 0;
+            }
 
             // Main loop for the chatbot
             while (true)
@@ -183,6 +195,7 @@ namespace ST10449143PROG6221POEPart1
                 }
             }
         }
+
         //Method to detect the topic based on user input
         private static string DetectTopic(string input)
         {
@@ -201,19 +214,41 @@ namespace ST10449143PROG6221POEPart1
 
             return null!;
         }
+
         //Method to provide a tip based on the topic
         private static void ProvideTipByTopic(string topic, string name)
         {
             var tips = topicTips[topic];
-            string tip = tips[random.Next(tips.Length)];
+
+            // If we've shown all tips for this topic, reset the queue
+            if (shownTipIndices[topic].Count >= tips.Length)
+            {
+                shownTipIndices[topic].Clear();
+            }
+
+            // Find the next tip that hasn't been shown recently
+            int tipIndex;
+            do
+            {
+                tipIndex = currentTipIndex[topic];
+                currentTipIndex[topic] = (currentTipIndex[topic] + 1) % tips.Length;
+            }
+            while (shownTipIndices[topic].Contains(tipIndex));
+
+            // Add this tip to the shown queue
+            shownTipIndices[topic].Enqueue(tipIndex);
+            string tip = tips[tipIndex];
 
             if (!string.IsNullOrEmpty(favoriteTopic) && topic.Equals(favoriteTopic, StringComparison.OrdinalIgnoreCase))
-                Program.PrintWithDelay($"\nSince you're interested in {favoriteTopic}, here's something you might like:", 13, ConsoleColor.Red);
+                Program.PrintWithDelay($"\nSince you're interested in {favoriteTopic}, " +
+                    $"here is some information to build upon that interest and" +
+                    $" allow you to really engage with {favoriteTopic}:", 13, ConsoleColor.Red);
 
             ConsoleColor[] tipColors = { ConsoleColor.Cyan, ConsoleColor.Blue, ConsoleColor.White, ConsoleColor.Magenta };
             ConsoleColor color = tipColors[random.Next(tipColors.Length)];
             Program.PrintWithDelay($"\n{tip}", 13, color);
         }
+
         // Method to remember user information
         private static bool TryRememberUserInfo(string input, string name)
         {
@@ -226,11 +261,12 @@ namespace ST10449143PROG6221POEPart1
                     if (topicTips.ContainsKey(topic))
                     {
                         favoriteTopic = topic;
-                        Program.PrintWithDelay($"\nGreat! I'll remember that you're interested in {favoriteTopic}. It's a crucial part of staying safe online.", 13, ConsoleColor.Red);
+                        Program.PrintWithDelay($"\nGreat! I'll remember that you're interested in {favoriteTopic}." +
+                            $"It's a crucial part of staying safe online.", 13, ConsoleColor.Red);
                         return true;
                     }
                 }
-            } 
+            }
             return false;
         }
 
@@ -242,7 +278,7 @@ namespace ST10449143PROG6221POEPart1
                 $"Certainly, {name}. Here's another useful insight:",
                 $"Absolutely, let me explain more with this next one:",
                 $"Sure thing, {name}. This should help clarify:",
-                $"Of course! Here’s something more to consider:",
+                $"Of course! Here's something more to consider:",
                 $"Let me give you another helpful point, {name}:"
             };
             Program.PrintWithDelay($"\n{followUpResponses[random.Next(followUpResponses.Length)]}", 13, ConsoleColor.DarkCyan);
@@ -256,7 +292,7 @@ namespace ST10449143PROG6221POEPart1
             else if (input.Contains("curious"))
                 Program.PrintWithDelay("\nCuriosity is great thing! Here's something to aid you in exploring your curiousity:", 13, ConsoleColor.Yellow);
             else if (input.Contains("frustrated"))
-                Program.PrintWithDelay("\nCybersecurity can be frustrating at times. Here's a helpful tip to ease your frustration:", 13, ConsoleColor.Blue);            
+                Program.PrintWithDelay("\nCybersecurity can be frustrating at times. Here's a helpful tip to ease your frustration:", 13, ConsoleColor.Blue);
             else if (input.Contains("thankful") || input.Contains("thanks") || input.Contains("thank you"))
                 Program.PrintWithDelay("\nThats good to hear! being thankful for knowledge is a great thing. Here's another tip you might like:", 13, ConsoleColor.Green);
             else if (input.Contains("anxious"))
